@@ -2,12 +2,12 @@
   {
     "icon": "Blog",
     "name": "博客",
-    "link": "https://blog.auzsa.uk/"
+    "link": "https://blog.azusa.uk/"
   },
   {
     "icon": "Cloud",
     "name": "网盘",
-    "link": "https://pan.auzsa.uk/"
+    "link": "https://pan.azusa.uk/"
   },
   {
     "icon": "CompactDisc",
@@ -17,7 +17,7 @@
   {
     "icon": "Compass",
     "name": "起始页",
-    "link": "https://nav.auzsa.uk/"
+    "link": "https://nav.azusa.uk/"
   },
   {
     "icon": "Book",

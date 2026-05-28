@@ -7,13 +7,13 @@
 
 ![梓の主页](https://s2.loli.net/2022/07/14/K5JigfvDoNewtuS.webp)
 
->主页的 Logo 字体已经过压缩，若用本站 Logo 以外的字母会变回默认字体，这里是 [完整字体](https://file.auzsa.uk/font/Other/Pacifico-Regular.ttf)，若无法下载，可将字体目录下的 `Pacifico-Regular-all.ttf` 进行替换
+>主页的 Logo 字体已经过压缩，若用本站 Logo 以外的字母会变回默认字体，这里是 [完整字体](https://file.azusa.uk/font/Other/Pacifico-Regular.ttf)，若无法下载，可将字体目录下的 `Pacifico-Regular-all.ttf` 进行替换
 
 ### Demo
 
 >由于 CDN 缓存原因，查看最新效果可能需要 `Ctrl` + `F5` 强制刷新浏览器缓存
 
-- [梓の主页](https://www.auzsa.uk)
+- [梓の主页](https://www.azusa.uk)
 - [梓の主页 - Dev](https://home-Azusa.vercel.app)
 - [梓の主页 - 备用线路](https://home-5iw.pages.dev)
 
@@ -61,7 +61,7 @@ pnpm build
 {
   "icon": "Blog",						
   "name": "博客",						
-  "link": "https://blog.auzsa.uk/"	
+  "link": "https://blog.azusa.uk/"	
 },
 ```
 
@@ -117,7 +117,7 @@ const siteIcon = {
 
 ```bash
 # 歌曲 API 地址
-VITE_SONG_API = "https://api-meting.auzsa.uk"
+VITE_SONG_API = "https://api-meting.azusa.uk"
 # 歌曲服务器 ( netease-网易云, tencent-qq音乐 )
 VITE_SONG_SERVER = "netease"
 # 播放类型 ( song-歌曲, playlist-播放列表, album-专辑, search-搜索, artist-艺术家 )
@@ -212,4 +212,4 @@ if (type == 0) {
 
 [![Star History Chart](https://api.star-history.com/svg?repos=Azusa/home&type=Date)](https://star-history.com/#Azusa/home&Date)
 
-<a title="SSL" target="_blank" href="https://myssl.com/seal/detail?domain=blog.auzsa.uk"><img src="https://img.shields.io/badge/MySSL-安全认证-brightgreen"></a>&nbsp;<a title="CDN" target="_blank" href="https://cdnjs.com/"><img src="https://img.shields.io/badge/CDN-Cloudflare-blue"></a>&nbsp;<a title="Copyright" target="_blank" href="https://auzsa.uk/"><img src="https://img.shields.io/badge/Copyright%20%C2%A9%202020--2023-%E6%A2%93-red"></a>
+<a title="SSL" target="_blank" href="https://myssl.com/seal/detail?domain=blog.azusa.uk"><img src="https://img.shields.io/badge/MySSL-安全认证-brightgreen"></a>&nbsp;<a title="CDN" target="_blank" href="https://cdnjs.com/"><img src="https://img.shields.io/badge/CDN-Cloudflare-blue"></a>&nbsp;<a title="Copyright" target="_blank" href="https://azusa.uk/"><img src="https://img.shields.io/badge/Copyright%20%C2%A9%202020--2023-%E6%A2%93-red"></a>
