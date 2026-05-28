@@ -1,47 +1,19 @@
 <template>
-  <!-- 音乐控制面板 -->
-  <div
-    class="music"
-    @mouseenter="volumeShow = true"
-    @mouseleave="volumeShow = false"
-    v-show="store.musicOpenState"
-  >
+  <!-- 音乐入口面板 -->
+  <div class="music" v-show="store.musicOpenState">
     <div class="btns">
       <span @click="openMusicList()">音乐列表</span>
       <span @click="store.musicOpenState = false">回到一言</span>
     </div>
-    <div class="control">
-      <go-start theme="filled" size="30" fill="#efefef" @click="changeMusicIndex(0)" />
-      <div class="state" @click="changePlayState">
-        <play-one theme="filled" size="50" fill="#efefef" v-show="!store.playerState" />
-        <pause theme="filled" size="50" fill="#efefef" v-show="store.playerState" />
-      </div>
-      <go-end theme="filled" size="30" fill="#efefef" @click="changeMusicIndex(1)" />
+    <div class="cover" @click="openMusicList()">
+      <music-one theme="filled" size="56" fill="#efefef" />
     </div>
     <div class="menu">
-      <div class="name" v-show="!volumeShow">
-        <span>{{
-          store.getPlayerData.name
-            ? store.getPlayerData.name + " - " + store.getPlayerData.artist
-            : "未播放音乐"
-        }}</span>
-      </div>
-      <div class="volume" v-show="volumeShow">
-        <div class="icon">
-          <volume-mute theme="filled" size="24" fill="#efefef" v-if="volumeNum == 0" />
-          <volume-small
-            theme="filled"
-            size="24"
-            fill="#efefef"
-            v-else-if="volumeNum > 0 && volumeNum < 0.7"
-          />
-          <volume-notice theme="filled" size="24" fill="#efefef" v-else />
-        </div>
-        <el-slider v-model="volumeNum" :show-tooltip="false" :min="0" :max="1" :step="0.01" />
-      </div>
+      <span class="name">Apple Music</span>
     </div>
   </div>
-  <!-- 音乐列表弹窗 -->
+
+  <!-- Apple Music 弹窗 -->
   <Transition name="fade" mode="out-in">
     <div class="music-list" v-show="musicListShow" @click="musicListShow = false">
       <Transition name="zoom">
@@ -53,13 +25,13 @@
             fill="#ffffff60"
             @click="musicListShow = false"
           />
-          <Player
-            :songServer="playerData.server"
-            :songType="playerData.type"
-            :songId="playerData.id"
-            :volume="volumeNum"
-            :shuffle="false"
-            ref="playerRef"
+          <iframe
+            v-if="iframeMounted"
+            class="apple-music"
+            allow="autoplay *; encrypted-media *; fullscreen *;"
+            frameborder="0"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            :src="embedUrl"
           />
         </div>
       </Transition>
@@ -68,67 +40,30 @@
 </template>
 
 <script setup>
-import {
-  GoStart,
-  PlayOne,
-  Pause,
-  GoEnd,
-  CloseOne,
-  VolumeMute,
-  VolumeSmall,
-  VolumeNotice,
-} from "@icon-park/vue-next";
-import Player from "@/components/Player.vue";
+import { MusicOne, CloseOne } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
 const store = mainStore();
 
-// 音量条数据
-const volumeShow = ref(false);
-const volumeNum = ref(store.musicVolume ? store.musicVolume : 0.7);
+// Apple Music 嵌入地址（在 .env 配置）
+const embedUrl = import.meta.env.VITE_APPLE_MUSIC_EMBED;
 
-// 播放列表数据
+// 弹窗状态
 const musicListShow = ref(false);
-const playerRef = ref(null);
-const playerData = reactive({
-  server: import.meta.env.VITE_SONG_SERVER,
-  type: import.meta.env.VITE_SONG_TYPE,
-  id: import.meta.env.VITE_SONG_ID,
-});
+// iframe 懒挂载，避免一进站就加载 Apple Music
+const iframeMounted = ref(false);
 
 // 开启播放列表
 const openMusicList = () => {
+  iframeMounted.value = true;
   musicListShow.value = true;
 };
 
-// 音乐播放暂停
-const changePlayState = () => {
-  playerRef.value.playToggle();
-};
-
-// 音乐上下曲
-const changeMusicIndex = (type) => {
-  playerRef.value.changeSong(type);
-};
-
 onMounted(() => {
-  // 空格键事件
-  window.addEventListener("keydown", (e) => {
-    if (e.code == "Space") {
-      changePlayState();
-    }
-  });
-  // 挂载方法至 window
+  // 标记音乐功能可用，Hitokoto 上的小图标即显示
+  store.musicIsOk = true;
+  // 挂载方法至 window，兼容旧的快捷调用
   window.$openList = openMusicList;
 });
-
-// 监听音量变化
-watch(
-  () => volumeNum.value,
-  (value) => {
-    store.musicVolume = value;
-    playerRef.value.changeVolume(store.musicVolume);
-  },
-);
 </script>
 
 <style lang="scss" scoped>
@@ -156,39 +91,28 @@ watch(
       text-overflow: ellipsis;
       overflow-x: hidden;
       white-space: nowrap;
+      cursor: pointer;
       &:hover {
         background: #ffffff4d;
       }
     }
   }
-  .control {
+  .cover {
+    width: 64px;
+    height: 64px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    .state {
-      .i-icon {
-        width: 50px;
-        height: 50px;
-        display: block;
-      }
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff1a;
+    cursor: pointer;
+    transition: transform 0.3s;
+    &:hover {
+      background: #ffffff33;
+      transform: scale(1.05);
     }
-    .i-icon {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      border-radius: 6px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 6px;
-      transform: scale(1);
-      &:hover {
-        background: #ffffff33;
-      }
-      &:active {
-        transform: scale(0.95);
-      }
+    &:active {
+      transform: scale(0.95);
     }
   }
   .menu {
@@ -196,44 +120,12 @@ watch(
     width: 100%;
     line-height: 26px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     .name {
-      width: 100%;
       text-align: center;
-      text-overflow: ellipsis;
-      overflow-x: hidden;
-      white-space: nowrap;
-      animation: fade 0.3s;
-    }
-    .volume {
-      width: 100%;
-      padding: 0 12px;
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      animation: fade 0.3s;
-      .icon {
-        margin-right: 12px;
-        span {
-          width: 24px;
-          height: 24px;
-          display: block;
-        }
-      }
-      :deep(*) {
-        transition: none;
-      }
-      :deep(.el-slider__button) {
-        transition: 0.3s;
-      }
-      .el-slider {
-        margin-right: 12px;
-        --el-slider-main-bg-color: #efefef;
-        --el-slider-runway-bg-color: #ffffff40;
-        --el-slider-button-size: 16px;
-      }
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
     }
   }
 }
@@ -256,9 +148,10 @@ watch(
     left: calc(50% - 320px);
     width: 640px;
     height: 600px;
-    background-color: #ffffff66;
-    border-radius: 6px;
+    background-color: transparent;
+    border-radius: 12px;
     z-index: 999;
+    overflow: hidden;
     @media (max-width: 720px) {
       left: calc(50% - 45%);
       width: 90%;
@@ -270,12 +163,22 @@ watch(
       width: 28px;
       height: 28px;
       display: block;
+      z-index: 2;
+      cursor: pointer;
       &:hover {
         transform: scale(1.2);
       }
       &:active {
         transform: scale(0.95);
       }
+    }
+    .apple-music {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      border-radius: 12px;
+      background: transparent;
+      overflow: hidden;
     }
   }
 }

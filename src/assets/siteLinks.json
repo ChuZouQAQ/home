@@ -23,15 +23,5 @@
     "icon": "Book",
     "name": "网址集",
     "link": "https://web.Azusa.top/"
-  },
-  {
-    "icon": "Fire",
-    "name": "今日热榜",
-    "link": "https://hot.Azusa.top/"
-  },
-  {
-    "icon": "LaptopCode",
-    "name": "站点监测",
-    "link": "https://status.Azusa.top/"
   }
 ]

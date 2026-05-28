@@ -33,7 +33,7 @@
   </Transition>
 </template>
 <script setup>
-import { helloInit, checkDays } from "@/utils/getTime.js";
+import { helloInit } from "@/utils/getTime.js";
 import { HamburgerButton, CloseSmall } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
 import { Icon } from "@vicons/utils";
@@ -59,8 +59,6 @@ const loadComplete = () => {
   nextTick(() => {
     // 欢迎提示
     helloInit();
-    // 默哀模式
-    checkDays();
   });
 };
 

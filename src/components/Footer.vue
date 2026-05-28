@@ -1,39 +1,27 @@
 <template>
   <footer id="footer" :class="store.footerBlur ? 'blur' : null">
-    <Transition name="fade" mode="out-in">
-      <div v-if="!store.playerState || !store.playerLrcShow" class="power">
-        <span>
-          Copyright&nbsp;&copy;
-          <span v-if="siteStartDate?.length >= 4" class="site-start">
-            {{ siteStartDate.substring(0, 4) }}
-            -
-          </span>
-          {{ fullYear }}
-          <a :href="siteUrl">{{ siteAnthor }}</a>
+    <div class="power">
+      <span>
+        Copyright&nbsp;&copy;
+        <span v-if="siteStartDate?.length >= 4" class="site-start">
+          {{ siteStartDate.substring(0, 4) }}
+          -
         </span>
-        <!-- 以下信息请不要修改哦 -->
-        <span class="hidden">
-          &amp;&nbsp;Made&nbsp;by
-          <a :href="config.github" target="_blank">
-            {{ config.author }}
-          </a>
-        </span>
-      </div>
-      <div v-else class="lrc">
-        <Transition name="fade" mode="out-in">
-          <div class="lrc-all" :key="store.getPlayerLrc">
-            <music-one theme="filled" size="18" fill="#efefef" />
-            <span class="lrc-text text-hidden" v-html="store.getPlayerLrc" />
-            <music-one theme="filled" size="18" fill="#efefef" />
-          </div>
-        </Transition>
-      </div>
-    </Transition>
+        {{ fullYear }}
+        <a :href="siteUrl">{{ siteAnthor }}</a>
+      </span>
+      <!-- 以下信息请不要修改哦 -->
+      <span class="hidden">
+        &amp;&nbsp;Made&nbsp;by
+        <a :href="config.github" target="_blank">
+          {{ config.author }}
+        </a>
+      </span>
+    </div>
   </footer>
 </template>
 
 <script setup>
-import { MusicOne } from "@icon-park/vue-next";
 import { mainStore } from "@/store";
 import config from "@/../package.json";
 

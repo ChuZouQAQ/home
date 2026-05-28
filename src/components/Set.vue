@@ -31,15 +31,6 @@
           />
         </div>
         <div class="item">
-          <span class="text">底栏歌词显示</span>
-          <el-switch
-            v-model="playerLrcShow"
-            inline-prompt
-            :active-icon="CheckSmall"
-            :inactive-icon="CloseSmall"
-          />
-        </div>
-        <div class="item">
           <span class="text">底栏背景模糊</span>
           <el-switch
             v-model="footerBlur"
@@ -65,7 +56,7 @@ import { mainStore } from "@/store";
 import { storeToRefs } from "pinia";
 
 const store = mainStore();
-const { coverType, siteStartShow, musicClick, playerLrcShow, footerBlur } = storeToRefs(store);
+const { coverType, siteStartShow, musicClick, footerBlur } = storeToRefs(store);
 
 // 默认选中项
 const activeName = ref("1");

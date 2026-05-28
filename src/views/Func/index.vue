@@ -41,8 +41,8 @@ const store = mainStore();
 const currentTime = ref({});
 const timeInterval = ref(null);
 
-// 播放器 id
-const playerHasId = import.meta.env.VITE_SONG_ID;
+// 播放器嵌入 URL（为空则隐藏音乐入口）
+const playerHasId = import.meta.env.VITE_APPLE_MUSIC_EMBED;
 
 // 更新时间
 const updateTimeData = () => {
