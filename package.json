@@ -17,7 +17,6 @@
     "element-plus": "^2.2.18",
     "pinia": "^2.0.23",
     "pinia-plugin-persistedstate": "^3.0.0",
-    "swiper": "^9.3.2",
     "vue": "^3.3.4"
   },
   "devDependencies": {

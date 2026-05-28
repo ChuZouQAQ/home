@@ -195,15 +195,34 @@ watch(
   }
 
   .description {
-    padding: 1rem 1.1rem;
-    margin-top: 3rem;
+    padding: 1.15rem 1.25rem;
+    margin-top: 2.5rem;
     max-width: 460px;
     animation: fade 0.5s;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      right: -30px;
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(
+        circle,
+        rgba(255, 179, 208, 0.32) 0%,
+        rgba(255, 179, 208, 0) 65%
+      );
+      pointer-events: none;
+    }
 
     .content {
       display: flex;
       justify-content: space-between;
+      position: relative;
+      z-index: 1;
 
       .text {
         margin: 0.65rem 1rem;

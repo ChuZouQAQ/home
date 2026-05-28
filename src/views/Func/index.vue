@@ -10,6 +10,7 @@
       </el-col>
       <el-col :span="12">
         <div class="right cards">
+          <span class="petal-deco" aria-hidden="true">🌸</span>
           <div class="time">
             <div class="date">
               <span>{{ currentTime.year }}&nbsp;·&nbsp;</span>
@@ -23,6 +24,7 @@
               ><span class="colon">:</span><span>{{ currentTime.second }}</span>
             </div>
           </div>
+          <span class="divider" aria-hidden="true" />
           <Weather />
         </div>
       </el-col>
@@ -115,6 +117,31 @@ onBeforeUnmount(() => {
       align-items: center;
       justify-content: space-between;
       animation: fade 0.5s;
+      position: relative;
+      overflow: hidden;
+
+      .petal-deco {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 0.95rem;
+        opacity: 0.55;
+        animation: sakura-pulse 3.5s ease-in-out infinite;
+        pointer-events: none;
+      }
+
+      .divider {
+        width: 50%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(255, 232, 244, 0),
+          rgba(255, 232, 244, 0.35),
+          rgba(255, 232, 244, 0)
+        );
+        margin: 6px 0 4px;
+      }
+
       .time {
         font-size: 1rem;
         text-align: center;

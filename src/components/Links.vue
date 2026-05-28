@@ -6,69 +6,38 @@
       </Icon>
       <span class="title">网站直达</span>
       <span class="title-deco" aria-hidden="true">🌸</span>
+      <span class="line-rule" aria-hidden="true" />
     </div>
     <!-- 网站列表 -->
-    <Swiper
-      v-if="siteLinks[0]"
-      :modules="[Pagination, Mousewheel]"
-      :slides-per-view="1"
-      :space-between="40"
-      :pagination="{
-        el: '.swiper-pagination',
-        clickable: true,
-        bulletElement: 'div',
-      }"
-      :mousewheel="true"
-    >
-      <SwiperSlide v-for="site in siteLinksList" :key="site">
-        <el-row class="link-all" :gutter="20">
-          <el-col v-for="(item, index) in site" :span="8" :key="item">
-            <div
-              class="item cards"
-              :style="index < 3 ? 'margin-bottom: 20px' : null"
-              @click="jumpLink(item)"
-              :title="item.link"
-            >
-              <Icon size="26">
-                <component :is="siteIcon[item.icon]" />
-              </Icon>
-              <span class="name text-hidden">{{ item.name }}</span>
-            </div>
-          </el-col>
-        </el-row>
-      </SwiperSlide>
-      <div class="swiper-pagination" />
-    </Swiper>
+    <div class="link-list">
+      <div
+        v-for="item in siteLinks"
+        :key="item.name"
+        class="item cards"
+        @click="jumpLink(item)"
+        :title="item.link"
+      >
+        <span class="petal-bg" aria-hidden="true" />
+        <Icon size="26" class="link-icon">
+          <component :is="siteIcon[item.icon]" />
+        </Icon>
+        <span class="name text-hidden">{{ item.name }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { Icon } from "@vicons/utils";
 // 可前往 https://www.xicons.org 自行挑选并在此处引入
-import { Link, Blog, CompactDisc, Cloud, Compass, Book, Fire, LaptopCode } from "@vicons/fa";
+import { Link, CompactDisc, Compass, Book, Fire, LaptopCode } from "@vicons/fa";
 import { mainStore } from "@/store";
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination, Mousewheel } from "swiper";
 import siteLinks from "@/assets/siteLinks.json";
-import "swiper/scss";
-import "swiper/scss/pagination";
 
 const store = mainStore();
 
-// 计算网站链接
-const siteLinksList = computed(() => {
-  const result = [];
-  for (let i = 0; i < siteLinks.length; i += 6) {
-    const subArr = siteLinks.slice(i, i + 6);
-    result.push(subArr);
-  }
-  return result;
-});
-
 // 网站链接图标
 const siteIcon = {
-  Blog,
-  Cloud,
   CompactDisc,
   Compass,
   Book,
@@ -88,12 +57,18 @@ const jumpLink = (data) => {
 
 <style lang="scss" scoped>
 .links {
+  margin-top: 0.25rem;
+
   .line {
-    margin: 2rem 0.25rem 1rem;
-    font-size: 1.1rem;
+    margin: 1.75rem 0.25rem 1rem;
     display: flex;
     align-items: center;
     animation: fade 0.5s;
+
+    .xicon {
+      color: var(--sakura-200);
+      filter: drop-shadow(0 0 6px rgba(255, 179, 208, 0.4));
+    }
 
     .title {
       margin-left: 8px;
@@ -107,82 +82,103 @@ const jumpLink = (data) => {
       font-size: 1rem;
       animation: sakura-pulse 3s ease-in-out infinite;
     }
-  }
-
-  .swiper {
-    left: -10px;
-    width: calc(100% + 20px);
-    padding: 5px 10px 0;
-    z-index: 0;
-    .swiper-slide {
-      height: 100%;
-    }
-    .swiper-pagination {
-      position: static;
-      margin-top: 6px;
-      :deep(.swiper-pagination-bullet) {
-        background: rgba(255, 255, 255, 0.45);
-        width: 18px;
-        height: 4px;
-        border-radius: 4px;
-        opacity: 0.6;
-        transition: all 0.3s;
-      }
-      :deep(.swiper-pagination-bullet-active) {
-        background: var(--sakura-300);
-        opacity: 1;
-        width: 28px;
-      }
+    .line-rule {
+      flex: 1;
+      height: 1px;
+      margin-left: 14px;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 232, 244, 0.45),
+        rgba(255, 232, 244, 0)
+      );
     }
   }
 
-  .link-all {
-    height: 220px;
+  .link-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+
     .item {
-      height: 100px;
-      width: 100%;
+      position: relative;
+      height: 110px;
       display: flex;
       align-items: center;
-      flex-direction: row;
       justify-content: center;
-      padding: 0 10px;
+      flex-direction: row;
+      padding: 0 14px;
       cursor: pointer;
+      overflow: hidden;
       animation: fade 0.5s;
 
-      .xicon {
-        color: var(--sakura-200);
-        transition: color 0.25s, transform 0.25s;
+      .petal-bg {
+        position: absolute;
+        top: -28px;
+        right: -28px;
+        width: 110px;
+        height: 110px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 179, 208, 0.35) 0%,
+          rgba(255, 179, 208, 0) 65%
+        );
+        opacity: 0.7;
+        transition: opacity 0.3s, transform 0.4s ease;
+        pointer-events: none;
       }
 
-      &:hover {
-        .xicon {
-          color: #fff;
-          transform: scale(1.1);
-        }
+      .link-icon {
+        color: var(--sakura-200);
+        transition: color 0.25s, transform 0.3s ease;
       }
 
       .name {
         font-size: 1.05rem;
-        margin-left: 10px;
+        margin-left: 12px;
         letter-spacing: 0.5px;
+        font-weight: 500;
       }
-      @media (min-width: 720px) and (max-width: 820px) {
-        .name { display: none; }
-      }
-      @media (max-width: 720px) {
-        height: 80px;
-      }
-      @media (max-width: 460px) {
-        flex-direction: column;
+
+      &:hover {
+        .link-icon {
+          color: #fff;
+          transform: scale(1.12) rotate(-6deg);
+        }
+        .petal-bg {
+          opacity: 1;
+          transform: scale(1.1);
+        }
         .name {
-          font-size: 1rem;
+          color: #fff;
+        }
+      }
+
+      @media (min-width: 720px) and (max-width: 820px) {
+        padding: 0 8px;
+        .name {
+          font-size: 0.95rem;
+          margin-left: 8px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        height: 92px;
+      }
+
+      @media (max-width: 460px) {
+        height: 96px;
+        flex-direction: column;
+        padding: 0 6px;
+        .name {
+          font-size: 0.95rem;
           margin-left: 0;
           margin-top: 8px;
         }
       }
     }
+
     @media (max-width: 720px) {
-      height: 180px;
+      gap: 12px;
     }
   }
 }
