@@ -42,6 +42,19 @@ const closeShow = ref(false);
   height: 80%;
   position: relative;
   animation: fade 0.5s;
+  overflow: hidden;
+
+  &::before {
+    /* sakura sheen on the corner */
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle, rgba(255, 179, 208, 0.45) 0%, rgba(255, 179, 208, 0) 65%);
+    pointer-events: none;
+  }
 
   &:hover {
     transform: scale(1);

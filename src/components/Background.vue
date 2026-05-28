@@ -9,15 +9,16 @@
       @error.once="imgLoadError"
       @animationend="imgAnimationEnd"
     />
+    <!-- 樱花色调蒙版 -->
     <div :class="store.backgroundShow ? 'gray hidden' : 'gray'" />
     <Transition name="fade" mode="out-in">
       <a
-        v-if="store.backgroundShow && store.coverType != '3'"
+        v-if="store.backgroundShow && store.coverType != '0'"
         class="down"
         :href="bgUrl"
         target="_blank"
       >
-        下载壁纸
+        🌸 下载壁纸
       </a>
     </Transition>
   </div>
@@ -66,10 +67,10 @@ const imgAnimationEnd = () => {
 const imgLoadError = () => {
   console.error("壁纸加载失败：", bgUrl.value);
   ElMessage({
-    message: "壁纸加载失败，已临时切换回默认",
+    message: "壁纸加载失败，已临时切换回默认樱花",
     icon: h(Error, {
       theme: "filled",
-      fill: "#efefef",
+      fill: "#ffb3d0",
     }),
   });
   bgUrl.value = "/images/Sakura2.png";
@@ -114,45 +115,51 @@ onBeforeUnmount(() => {
     animation: fade-blur-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     animation-delay: 0.45s;
   }
+
+  /* 樱花色调蒙版：上明下暗，中央偏粉，便于阅读 */
   .gray {
     opacity: 1;
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.5) 100%),
-      radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
-
+    inset: 0;
+    background:
+      radial-gradient(120% 80% at 20% 0%, rgba(255, 200, 224, 0.18) 0%, rgba(0, 0, 0, 0) 60%),
+      radial-gradient(100% 80% at 80% 100%, rgba(120, 50, 110, 0.45) 0%, rgba(0, 0, 0, 0) 65%),
+      linear-gradient(180deg, rgba(20, 10, 30, 0.05) 0%, rgba(20, 10, 30, 0.55) 100%);
     transition: 1.5s;
+
     &.hidden {
       opacity: 0;
       transition: 1.5s;
     }
   }
+
   .down {
-    font-size: 16px;
-    color: white;
+    font-size: 15px;
+    color: #fff;
     position: absolute;
     bottom: 30px;
     left: 0;
     right: 0;
     margin: 0 auto;
-    display: block;
-    padding: 20px 26px;
-    border-radius: 8px;
-    background-color: #00000030;
-    width: 120px;
-    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: var(--glass-medium);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-petal);
+    width: max-content;
+    height: auto;
+
     &:hover {
-      transform: scale(1.05);
-      background-color: #00000060;
+      transform: scale(1.04);
+      background: var(--glass-strong);
+      color: #fff;
     }
     &:active {
-      transform: scale(1);
+      transform: scale(0.98);
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="time-capsule">
     <div class="title">
-      <hourglass-full theme="two-tone" size="24" :fill="['#efefef', '#00000020']" />
+      <hourglass-full theme="two-tone" size="24" :fill="['#ffffff', '#ff8fb8']" />
       <span>时光胶囊</span>
     </div>
     <span class="text">今日已经度过了&nbsp;{{ timeData.day.elapsed }}&nbsp;小时</span>
@@ -57,18 +57,21 @@ onBeforeUnmount(() => {
     flex-direction: row;
     align-items: center;
     margin: 0.2rem 0 1.5rem;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
     .i-icon {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 6px;
+      margin-right: 8px;
+      filter: drop-shadow(0 0 6px rgba(255, 143, 184, 0.5));
     }
   }
   .text {
     display: block;
     margin: 1rem 0rem 0.5rem 0rem;
     font-size: 0.95rem;
+    color: var(--text-soft);
   }
 }
 </style>

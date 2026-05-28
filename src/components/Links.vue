@@ -4,7 +4,8 @@
       <Icon size="20">
         <Link />
       </Icon>
-      <span class="title">网站列表</span>
+      <span class="title">网站直达</span>
+      <span class="title-deco" aria-hidden="true">🌸</span>
     </div>
     <!-- 网站列表 -->
     <Swiper
@@ -26,6 +27,7 @@
               class="item cards"
               :style="index < 3 ? 'margin-bottom: 20px' : null"
               @click="jumpLink(item)"
+              :title="item.link"
             >
               <Icon size="26">
                 <component :is="siteIcon[item.icon]" />
@@ -43,7 +45,7 @@
 <script setup>
 import { Icon } from "@vicons/utils";
 // 可前往 https://www.xicons.org 自行挑选并在此处引入
-import { Link, Blog, CompactDisc, Cloud, Compass, Book, Fire, LaptopCode } from "@vicons/fa"; // 注意使用正确的类别
+import { Link, Blog, CompactDisc, Cloud, Compass, Book, Fire, LaptopCode } from "@vicons/fa";
 import { mainStore } from "@/store";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Mousewheel } from "swiper";
@@ -82,10 +84,6 @@ const jumpLink = (data) => {
     window.open(data.link, "_blank");
   }
 };
-
-onMounted(() => {
-  console.log(siteLinks);
-});
 </script>
 
 <style lang="scss" scoped>
@@ -96,12 +94,21 @@ onMounted(() => {
     display: flex;
     align-items: center;
     animation: fade 0.5s;
+
     .title {
       margin-left: 8px;
       font-size: 1.15rem;
-      text-shadow: 0 0 5px #00000050;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    }
+    .title-deco {
+      margin-left: 8px;
+      font-size: 1rem;
+      animation: sakura-pulse 3s ease-in-out infinite;
     }
   }
+
   .swiper {
     left: -10px;
     width: calc(100% + 20px);
@@ -112,19 +119,23 @@ onMounted(() => {
     }
     .swiper-pagination {
       position: static;
-      margin-top: 4px;
+      margin-top: 6px;
       :deep(.swiper-pagination-bullet) {
-        background-color: #fff;
+        background: rgba(255, 255, 255, 0.45);
         width: 18px;
         height: 4px;
         border-radius: 4px;
-        transition: opacity 0.3s;
-        &:hover {
-          opacity: 1;
-        }
+        opacity: 0.6;
+        transition: all 0.3s;
+      }
+      :deep(.swiper-pagination-bullet-active) {
+        background: var(--sakura-300);
+        opacity: 1;
+        width: 28px;
       }
     }
   }
+
   .link-all {
     height: 220px;
     .item {
@@ -135,26 +146,28 @@ onMounted(() => {
       flex-direction: row;
       justify-content: center;
       padding: 0 10px;
+      cursor: pointer;
       animation: fade 0.5s;
 
-      &:hover {
-        transform: scale(1.02);
-        background: rgb(0 0 0 / 40%);
-        transition: 0.3s;
+      .xicon {
+        color: var(--sakura-200);
+        transition: color 0.25s, transform 0.25s;
       }
 
-      &:active {
-        transform: scale(1);
+      &:hover {
+        .xicon {
+          color: #fff;
+          transform: scale(1.1);
+        }
       }
 
       .name {
-        font-size: 1.1rem;
-        margin-left: 8px;
+        font-size: 1.05rem;
+        margin-left: 10px;
+        letter-spacing: 0.5px;
       }
       @media (min-width: 720px) and (max-width: 820px) {
-        .name {
-          display: none;
-        }
+        .name { display: none; }
       }
       @media (max-width: 720px) {
         height: 80px;

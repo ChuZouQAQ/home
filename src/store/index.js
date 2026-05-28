@@ -16,6 +16,7 @@ export const mainStore = defineStore("main", {
       mobileFuncState: false, // 移动端功能区开启状态
       setOpenState: false, // 设置页面开启状态
       footerBlur: true, // 底栏模糊
+      petalsEnabled: true, // 🌸 樱花飘落特效
     };
   },
   getters: {
@@ -41,6 +42,6 @@ export const mainStore = defineStore("main", {
   persist: {
     key: "data",
     storage: window.localStorage,
-    paths: ["coverType", "siteStartShow", "musicClick", "footerBlur"],
+    paths: ["coverType", "siteStartShow", "musicClick", "footerBlur", "petalsEnabled"],
   },
 });

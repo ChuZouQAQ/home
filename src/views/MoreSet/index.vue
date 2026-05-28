@@ -98,8 +98,14 @@ const jumpTo = (url) => {
   transform: translate(-50%, -50%);
   width: 80%;
   height: 80%;
-  background: rgb(255 255 255 / 40%);
-  border-radius: 6px;
+  background:
+    radial-gradient(80% 60% at 80% 0%, rgba(255, 179, 208, 0.35) 0%, rgba(0, 0, 0, 0) 60%),
+    rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-deep);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-radius: var(--r-lg);
   padding: 40px;
 
   .close {

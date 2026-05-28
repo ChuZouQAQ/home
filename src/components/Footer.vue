@@ -1,21 +1,19 @@
 <template>
   <footer id="footer" :class="store.footerBlur ? 'blur' : null">
     <div class="power">
+      <span class="petal" aria-hidden="true">🌸</span>
       <span>
         Copyright&nbsp;&copy;
         <span v-if="siteStartDate?.length >= 4" class="site-start">
-          {{ siteStartDate.substring(0, 4) }}
-          -
+          {{ siteStartDate.substring(0, 4) }} -
         </span>
         {{ fullYear }}
         <a :href="siteUrl">{{ siteAnthor }}</a>
       </span>
       <!-- 以下信息请不要修改哦 -->
       <span class="hidden">
-        &amp;&nbsp;Made&nbsp;by
-        <a :href="config.github" target="_blank">
-          {{ config.author }}
-        </a>
+        &nbsp;·&nbsp;Made&nbsp;by
+        <a :href="config.github" target="_blank">{{ config.author }}</a>
       </span>
     </div>
   </footer>
@@ -34,7 +32,6 @@ const siteAnthor = ref(import.meta.env.VITE_SITE_ANTHOR);
 const siteUrl = computed(() => {
   const url = import.meta.env.VITE_SITE_URL;
   if (!url) return "https://Azusa.uk";
-  // 判断协议前缀
   if (!url.startsWith("http://") && !url.startsWith("https://")) {
     return "//" + url;
   }
@@ -53,40 +50,42 @@ const siteUrl = computed(() => {
   text-align: center;
   z-index: 0;
   font-size: 14px;
+  color: var(--text-soft);
+
   .power {
     animation: fade 0.3s;
-  }
-  .lrc {
-    padding: 0 20px;
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
-    .lrc-all {
-      width: 98%;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      .lrc-text {
-        margin: 0 8px;
-      }
-      .i-icon {
-        width: 18px;
-        height: 18px;
-        display: inherit;
-      }
+    gap: 6px;
+
+    .petal {
+      animation: sakura-pulse 3s ease-in-out infinite;
+    }
+
+    a {
+      color: var(--sakura-100);
+      transition: color 0.2s;
+      &:hover { color: var(--sakura-300); }
     }
   }
+
   &.blur {
-    backdrop-filter: blur(10px);
-    background: rgb(0 0 0 / 25%);
-    font-size: 16px;
+    backdrop-filter: blur(12px);
+    background: linear-gradient(
+      180deg,
+      rgba(40, 20, 50, 0) 0%,
+      rgba(40, 20, 50, 0.45) 100%
+    );
+    border-top: 1px solid rgba(255, 232, 244, 0.12);
+    font-size: 15px;
   }
+
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 0.15s ease-in-out;
   }
+
   @media (max-width: 720px) {
     font-size: 0.85rem;
     &.blur {
@@ -94,9 +93,7 @@ const siteUrl = computed(() => {
     }
   }
   @media (max-width: 480px) {
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
   }
 }
 </style>

@@ -12,13 +12,15 @@
         <div class="right cards">
           <div class="time">
             <div class="date">
-              <span>{{ currentTime.year }}&nbsp;年&nbsp;</span>
-              <span>{{ currentTime.month }}&nbsp;月&nbsp;</span>
-              <span>{{ currentTime.day }}&nbsp;日&nbsp;</span>
-              <span class="sm-hidden">{{ currentTime.weekday }}</span>
+              <span>{{ currentTime.year }}&nbsp;·&nbsp;</span>
+              <span>{{ currentTime.month }}&nbsp;·&nbsp;</span>
+              <span>{{ currentTime.day }}&nbsp;</span>
+              <span class="sm-hidden weekday">{{ currentTime.weekday }}</span>
             </div>
             <div class="text">
-              <span> {{ currentTime.hour }}:{{ currentTime.minute }}:{{ currentTime.second }}</span>
+              <span>{{ currentTime.hour }}</span
+              ><span class="colon">:</span><span>{{ currentTime.minute }}</span
+              ><span class="colon">:</span><span>{{ currentTime.second }}</span>
             </div>
           </div>
           <Weather />
@@ -107,25 +109,47 @@ onBeforeUnmount(() => {
       height: 100%;
     }
     .right {
-      padding: 20px;
+      padding: 18px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
       animation: fade 0.5s;
       .time {
-        font-size: 1.1rem;
+        font-size: 1rem;
         text-align: center;
+        width: 100%;
         .date {
+          color: var(--text-soft);
+          font-size: 0.95rem;
+          letter-spacing: 0.5px;
           text-overflow: ellipsis;
           overflow-x: hidden;
           white-space: nowrap;
+          .weekday {
+            color: var(--sakura-200);
+            margin-left: 4px;
+          }
         }
         .text {
-          margin-top: 10px;
-          font-size: 3.25rem;
+          margin-top: 6px;
+          font-size: 3rem;
           letter-spacing: 2px;
           font-family: "UnidreamLED";
+          background: linear-gradient(180deg, #ffffff 0%, #ffd0e3 80%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          text-shadow: 0 4px 18px rgba(247, 106, 161, 0.35);
+          line-height: 1.05;
+          .colon {
+            opacity: 0.85;
+            animation: colon-blink 1.2s steps(2, end) infinite;
+            display: inline-block;
+            transform: translateY(-2px);
+            margin: 0 2px;
+            -webkit-text-fill-color: #ffd0e3;
+          }
         }
       }
       .weather {
@@ -134,8 +158,15 @@ onBeforeUnmount(() => {
         text-overflow: ellipsis;
         overflow-x: hidden;
         white-space: nowrap;
+        color: var(--text-soft);
+        font-size: 0.95rem;
       }
     }
   }
+}
+
+@keyframes colon-blink {
+  0%, 60%   { opacity: 1; }
+  60.01%, 100% { opacity: 0.25; }
 }
 </style>

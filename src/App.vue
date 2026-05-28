@@ -3,6 +3,8 @@
   <Loading />
   <!-- 壁纸 -->
   <Background @loadComplete="loadComplete" />
+  <!-- 🌸 樱花飘落层 -->
+  <SakuraPetals v-if="store.imgLoadStatus && store.petalsEnabled" :count="petalCount" />
   <!-- 主界面 -->
   <Transition name="fade" mode="out-in">
     <main id="main" v-if="store.imgLoadStatus">
@@ -17,14 +19,18 @@
         </section>
       </div>
       <!-- 移动端菜单按钮 -->
-      <Icon
+      <button
+        type="button"
         class="menu"
-        size="24"
         v-show="!store.backgroundShow"
+        :aria-label="store.mobileOpenState ? '关闭菜单' : '打开菜单'"
+        :aria-expanded="store.mobileOpenState"
         @click="store.mobileOpenState = !store.mobileOpenState"
       >
-        <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
-      </Icon>
+        <Icon size="22">
+          <component :is="store.mobileOpenState ? CloseSmall : HamburgerButton" />
+        </Icon>
+      </button>
       <!-- 页脚 -->
       <Transition name="fade" mode="out-in">
         <Footer v-show="!store.backgroundShow && !store.setOpenState" />
@@ -44,6 +50,7 @@ import Background from "@/components/Background.vue";
 import Footer from "@/components/Footer.vue";
 import Box from "@/views/Box/index.vue";
 import MoreSet from "@/views/MoreSet/index.vue";
+import SakuraPetals from "@/components/SakuraPetals.vue";
 import cursorInit from "@/utils/cursor.js";
 import config from "@/../package.json";
 
@@ -53,6 +60,15 @@ const store = mainStore();
 const getWidth = () => {
   store.setInnerWidth(window.innerWidth);
 };
+
+// 樱花花瓣数量随屏幕宽度自适应
+const petalCount = computed(() => {
+  if (!store.innerWidth) return 18;
+  if (store.innerWidth < 480) return 8;
+  if (store.innerWidth < 768) return 12;
+  if (store.innerWidth < 1280) return 18;
+  return 24;
+});
 
 // 加载完成事件
 const loadComplete = () => {
@@ -102,10 +118,10 @@ onMounted(() => {
   window.addEventListener("resize", getWidth);
 
   // 控制台输出
-  const styleTitle1 = "font-size: 20px;font-weight: 600;color: rgb(244,167,89);";
-  const styleTitle2 = "font-size:12px;color: rgb(244,167,89);";
-  const styleContent = "color: rgb(30,152,255);";
-  const title1 = "梓の主页";
+  const styleTitle1 = "font-size: 20px;font-weight: 600;color: #ff8fb8;";
+  const styleTitle2 = "font-size:12px;color: #ffb3d0;";
+  const styleContent = "color: #f76aa1;";
+  const title1 = "🌸 梓の主页";
   const title2 = `
  _____ __  __  _______     ____     __
 |_   _|  \\/  |/ ____\\ \\   / /\\ \\   / /
@@ -133,6 +149,7 @@ onBeforeUnmount(() => {
   transition: transform 0.3s;
   animation: fade-blur-main-in 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   animation-delay: 0.5s;
+  z-index: 1;
   .container {
     width: 100%;
     height: 100vh;
@@ -152,7 +169,12 @@ onBeforeUnmount(() => {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: #00000080;
+      background: radial-gradient(
+          80% 60% at 50% 30%,
+          rgba(247, 106, 161, 0.18) 0%,
+          rgba(0, 0, 0, 0) 60%
+        ),
+        rgba(20, 10, 30, 0.55);
       backdrop-filter: blur(20px);
       z-index: 2;
       animation: fade 0.5s;
@@ -166,20 +188,29 @@ onBeforeUnmount(() => {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 84%;
-    left: calc(50% - 28px);
-    width: 56px;
-    height: 34px;
-    background: rgb(0 0 0 / 20%);
-    backdrop-filter: blur(10px);
-    border-radius: 6px;
-    transition: transform 0.3s;
+    bottom: 18px;
+    left: calc(50% - 30px);
+    width: 60px;
+    height: 38px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-medium);
+    backdrop-filter: blur(12px) saturate(140%);
+    color: var(--text-normal);
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: var(--shadow-petal);
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease;
     animation: fade 0.5s;
+    &:hover {
+      background: var(--glass-strong);
+    }
     &:active {
-      transform: scale(0.95);
+      transform: scale(0.94);
     }
     .i-icon {
-      transform: translateY(2px);
+      transform: translateY(1px);
     }
     @media (min-width: 721px) {
       display: none;
