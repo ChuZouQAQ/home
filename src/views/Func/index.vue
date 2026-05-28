@@ -65,7 +65,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss" scoped>
 .function {
-  height: 165px;
+  height: 158px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -111,7 +111,7 @@ onBeforeUnmount(() => {
       height: 100%;
     }
     .right {
-      padding: 18px 20px;
+      padding: 16px 18px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -131,7 +131,7 @@ onBeforeUnmount(() => {
       }
 
       .divider {
-        width: 50%;
+        width: 58%;
         height: 1px;
         background: linear-gradient(
           90deg,
@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
         width: 100%;
         .date {
           color: var(--text-soft);
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           letter-spacing: 0.5px;
           text-overflow: ellipsis;
           overflow-x: hidden;
@@ -160,8 +160,8 @@ onBeforeUnmount(() => {
         }
         .text {
           margin-top: 6px;
-          font-size: 3rem;
-          letter-spacing: 2px;
+          font-size: clamp(2.35rem, 4vw, 2.85rem);
+          letter-spacing: 0;
           font-family: "UnidreamLED";
           background: linear-gradient(180deg, #ffffff 0%, #ffd0e3 80%);
           -webkit-background-clip: text;
@@ -186,9 +186,12 @@ onBeforeUnmount(() => {
         overflow-x: hidden;
         white-space: nowrap;
         color: var(--text-soft);
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
     }
+  }
+  @media (max-width: 720px) {
+    height: 150px;
   }
 }
 

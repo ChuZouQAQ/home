@@ -33,9 +33,7 @@ const siteUrl = computed(() => {
 
 <style lang="scss" scoped>
 .right {
-  // flex: 1 0 0%;
-  width: 50%;
-  margin-left: 0.75rem;
+  width: min(54%, 560px);
   .logo {
     width: 100%;
     font-family: "Pacifico-Regular";
@@ -61,7 +59,6 @@ const siteUrl = computed(() => {
     }
   }
   @media (max-width: 720px) {
-    margin-left: 0;
     width: 100%;
     &.hidden {
       display: none;

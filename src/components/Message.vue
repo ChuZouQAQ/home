@@ -102,8 +102,8 @@ watch(
 
     .logo-img-wrap {
       position: relative;
-      width: 120px;
-      height: 120px;
+      width: 112px;
+      height: 112px;
       flex-shrink: 0;
 
       .logo-img {
@@ -112,7 +112,9 @@ watch(
         border-radius: 50%;
         object-fit: cover;
         border: 2px solid rgba(255, 232, 244, 0.55);
-        box-shadow: 0 8px 24px rgba(216, 79, 142, 0.35);
+        box-shadow:
+          0 10px 26px rgba(35, 18, 54, 0.34),
+          0 0 0 6px rgba(255, 244, 250, 0.08);
         position: relative;
         z-index: 1;
         transition: transform 0.4s ease;
@@ -141,8 +143,8 @@ watch(
 
     .name {
       width: 100%;
-      padding-left: 22px;
-      transform: translateY(-8px);
+      padding-left: 20px;
+      transform: translateY(-4px);
       font-family: "Pacifico-Regular";
       color: #fff;
       letter-spacing: 0;
@@ -154,7 +156,7 @@ watch(
         0 0 26px rgba(255, 176, 205, 0.32);
 
       .bg {
-        font-size: 4.7rem;
+        font-size: clamp(3.6rem, 6vw, 4.45rem);
         line-height: 1;
         background: linear-gradient(180deg, #ffffff 8%, #ffeaf3 48%, #f8b8d6 100%);
         background-clip: text;
@@ -164,7 +166,7 @@ watch(
 
       .sm {
         margin-left: 6px;
-        font-size: 1.95rem;
+        font-size: clamp(1.35rem, 2.4vw, 1.85rem);
         line-height: 1;
         color: #fff8fc;
         -webkit-text-fill-color: #fff8fc;
@@ -195,8 +197,8 @@ watch(
   }
 
   .description {
-    padding: 1.15rem 1.25rem;
-    margin-top: 2.5rem;
+    padding: 1rem 1.15rem;
+    margin-top: 2rem;
     max-width: 460px;
     animation: fade 0.5s;
     cursor: pointer;
@@ -226,13 +228,13 @@ watch(
 
       .text {
         margin: 0.65rem 1rem;
-        line-height: 1.85rem;
+        line-height: 1.75rem;
         margin-right: auto;
 
         p {
           &:nth-of-type(1) {
             font-family: "Pacifico-Regular";
-            font-size: 1.55rem;
+            font-size: 1.45rem;
             background: linear-gradient(180deg, #ffffff 0%, #ffd0e3 100%);
             -webkit-background-clip: text;
             background-clip: text;
@@ -242,7 +244,7 @@ watch(
           }
           &:nth-of-type(2) {
             color: var(--text-soft);
-            font-size: 0.95rem;
+            font-size: 0.93rem;
           }
         }
       }

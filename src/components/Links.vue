@@ -57,10 +57,10 @@ const jumpLink = (data) => {
 
 <style lang="scss" scoped>
 .links {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 
   .line {
-    margin: 1.75rem 0.25rem 1rem;
+    margin: 1.45rem 0.25rem 0.9rem;
     display: flex;
     align-items: center;
     animation: fade 0.5s;
@@ -72,9 +72,9 @@ const jumpLink = (data) => {
 
     .title {
       margin-left: 8px;
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       font-weight: 600;
-      letter-spacing: 0.5px;
+      letter-spacing: 0;
       text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     }
     .title-deco {
@@ -97,16 +97,16 @@ const jumpLink = (data) => {
   .link-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
+    gap: 14px;
 
     .item {
       position: relative;
-      height: 110px;
+      min-height: 98px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: row;
-      padding: 0 14px;
+      padding: 0 12px;
       cursor: pointer;
       overflow: hidden;
       animation: fade 0.5s;
@@ -129,13 +129,14 @@ const jumpLink = (data) => {
 
       .link-icon {
         color: var(--sakura-200);
+        filter: drop-shadow(0 4px 10px rgba(35, 18, 54, 0.22));
         transition: color 0.25s, transform 0.3s ease;
       }
 
       .name {
-        font-size: 1.05rem;
-        margin-left: 12px;
-        letter-spacing: 0.5px;
+        font-size: 1rem;
+        margin-left: 10px;
+        letter-spacing: 0;
         font-weight: 500;
       }
 
@@ -162,11 +163,11 @@ const jumpLink = (data) => {
       }
 
       @media (max-width: 720px) {
-        height: 92px;
+        min-height: 88px;
       }
 
       @media (max-width: 460px) {
-        height: 96px;
+        min-height: 90px;
         flex-direction: column;
         padding: 0 6px;
         .name {

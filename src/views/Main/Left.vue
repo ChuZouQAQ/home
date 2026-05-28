@@ -14,16 +14,14 @@ const store = mainStore();
 
 <style lang="scss" scoped>
 .left {
-  // flex: 1 0 0%;
-  width: 50%;
-  margin-right: 10px;
-  transform: translateY(20px);
+  width: min(46%, 500px);
+  transform: translateY(12px);
   &.hidden {
     display: none;
   }
   @media (max-width: 720px) {
-    margin-right: 0;
     width: 100%;
+    transform: none;
   }
 }
 </style>

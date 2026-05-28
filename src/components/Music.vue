@@ -70,10 +70,15 @@ onMounted(() => {
 .music {
   width: 100%;
   height: 100%;
-  background: #00000040;
-  backdrop-filter: blur(10px);
-  border-radius: 6px;
-  padding: 20px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 236, 246, 0.04)),
+    var(--glass-medium);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
+  border-radius: var(--r-md);
+  padding: 18px;
+  box-shadow: var(--shadow-petal);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -84,16 +89,16 @@ onMounted(() => {
     align-items: center;
     margin-bottom: 6px;
     span {
-      background: #ffffff26;
+      background: rgba(255, 255, 255, 0.14);
       padding: 2px 8px;
-      border-radius: 6px;
+      border-radius: var(--r-sm);
       margin: 0px 6px;
       text-overflow: ellipsis;
       overflow-x: hidden;
       white-space: nowrap;
       cursor: pointer;
       &:hover {
-        background: #ffffff4d;
+        background: rgba(255, 255, 255, 0.24);
       }
     }
   }
@@ -104,11 +109,11 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    background: #ffffff1a;
+    background: rgba(255, 255, 255, 0.12);
     cursor: pointer;
     transition: transform 0.3s;
     &:hover {
-      background: #ffffff33;
+      background: rgba(255, 255, 255, 0.22);
       transform: scale(1.05);
     }
     &:active {

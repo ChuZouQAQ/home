@@ -19,16 +19,19 @@ GitHub：https://github.com/Azusa/home
   --sakura-400: #ff8fb8;
   --sakura-500: #f76aa1;
   --sakura-600: #d94d8a;
+  --mist-100:   #e7fbff;
+  --mist-300:   #9ee7ee;
+  --gold-200:   #ffe8ad;
   /* Night sky gradient (dusk over a sakura grove) */
   --night-1:    #2a1738;
   --night-2:    #3d2148;
   --night-3:    #5a2c5a;
 
   /* Glass surfaces */
-  --glass-soft:   rgba(255, 244, 250, 0.10);
-  --glass-medium: rgba(255, 234, 244, 0.16);
-  --glass-strong: rgba(255, 224, 240, 0.24);
-  --glass-border: rgba(255, 232, 244, 0.30);
+  --glass-soft:   rgba(255, 247, 252, 0.08);
+  --glass-medium: rgba(255, 247, 252, 0.14);
+  --glass-strong: rgba(255, 247, 252, 0.22);
+  --glass-border: rgba(255, 244, 250, 0.26);
 
   /* Text */
   --text-strong: #ffffff;
@@ -37,13 +40,13 @@ GitHub：https://github.com/Azusa/home
   --text-mute:   rgba(255, 240, 250, 0.55);
 
   /* Shadows */
-  --shadow-petal: 0 8px 28px rgba(216, 79, 142, 0.22);
-  --shadow-deep:  0 14px 40px rgba(20, 10, 35, 0.45);
+  --shadow-petal: 0 10px 30px rgba(92, 36, 86, 0.24);
+  --shadow-deep:  0 18px 48px rgba(18, 10, 32, 0.44);
 
   /* Radii */
-  --r-sm: 10px;
-  --r-md: 14px;
-  --r-lg: 20px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
 }
 
 /* =========================================================
@@ -56,8 +59,8 @@ body {
   margin: 0;
   padding: 0;
   background:
-    radial-gradient(120% 80% at 20% 10%, rgba(255, 182, 213, 0.18) 0%, transparent 60%),
-    radial-gradient(90% 70% at 90% 90%, rgba(122, 60, 126, 0.35) 0%, transparent 65%),
+    radial-gradient(90% 70% at 18% 12%, rgba(255, 182, 213, 0.18) 0%, transparent 62%),
+    radial-gradient(75% 65% at 88% 86%, rgba(105, 205, 218, 0.13) 0%, transparent 64%),
     linear-gradient(180deg, var(--night-1) 0%, var(--night-2) 55%, var(--night-3) 100%);
   background-attachment: fixed;
   overflow: hidden;
@@ -117,12 +120,15 @@ a {
 .cards {
   position: relative;
   border-radius: var(--r-md);
-  background: var(--glass-medium);
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 236, 246, 0.04)),
+    var(--glass-medium);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(145%);
+  -webkit-backdrop-filter: blur(18px) saturate(145%);
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.18) inset,
+    0 -1px 0 rgba(255, 255, 255, 0.05) inset,
     var(--shadow-petal);
   transform: scale(1);
   transition:
@@ -132,10 +138,12 @@ a {
     transform 0.25s ease;
 
   &:hover {
-    background: var(--glass-strong);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 236, 246, 0.07)),
+      var(--glass-strong);
     box-shadow:
       0 1px 0 rgba(255, 255, 255, 0.22) inset,
-      0 12px 36px rgba(216, 79, 142, 0.32);
+      0 14px 38px rgba(92, 36, 86, 0.3);
     transform: translateY(-2px) scale(1.01);
   }
 

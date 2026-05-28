@@ -87,7 +87,7 @@ onMounted(() => {
 .hitokoto {
   width: 100%;
   height: 100%;
-  padding: 22px;
+  padding: 20px;
   cursor: pointer;
   animation: fade 0.5s;
 
@@ -136,8 +136,8 @@ onMounted(() => {
     }
 
     .text {
-      font-size: 1.08rem;
-      line-height: 1.65;
+      font-size: 1rem;
+      line-height: 1.62;
       word-break: break-word;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -147,10 +147,10 @@ onMounted(() => {
       padding-left: 22px;
     }
     .from {
-      margin-top: 10px;
+      margin-top: 8px;
       font-weight: 600;
       align-self: flex-end;
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--sakura-100);
     }
   }

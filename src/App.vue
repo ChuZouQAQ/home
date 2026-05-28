@@ -154,14 +154,16 @@ onBeforeUnmount(() => {
     width: 100%;
     height: 100vh;
     margin: 0 auto;
+    max-width: 1180px;
     .all {
       width: 100%;
       height: 100%;
-      padding: 0 0.75rem;
+      padding: clamp(18px, 4vw, 48px);
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      gap: clamp(18px, 3vw, 34px);
     }
     .more {
       position: fixed;
@@ -180,7 +182,13 @@ onBeforeUnmount(() => {
       animation: fade 0.5s;
     }
     @media (max-width: 1200px) {
-      padding: 0 2vw;
+      padding: 0 1.5vw;
+    }
+    @media (max-width: 720px) {
+      .all {
+        padding: 84px 18px 72px;
+        align-items: flex-start;
+      }
     }
   }
   .menu {
