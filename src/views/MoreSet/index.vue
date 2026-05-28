@@ -63,7 +63,7 @@ const closeShow = ref(false);
 // 站点链接
 const siteUrl = computed(() => {
   const url = import.meta.env.VITE_SITE_URL;
-  if (!url) return "imsyy.top".split(".");
+  if (!url) return "Azusa.uk".split(".");
   // 判断协议前缀
   if (url.startsWith("http://") || url.startsWith("https://")) {
     const urlFormat = url.replace(/^(https?:\/\/)/, "");
@@ -136,14 +136,33 @@ const jumpTo = (url) => {
         padding-left: 22px;
         width: 100%;
         height: 260px;
+        color: #fff;
+        letter-spacing: 0;
+        filter: drop-shadow(0 10px 18px rgba(20, 12, 45, 0.35));
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.28);
+        text-shadow:
+          0 2px 0 rgba(255, 255, 255, 0.2),
+          0 8px 18px rgba(24, 13, 56, 0.36),
+          0 0 26px rgba(255, 176, 205, 0.28);
 
         .bg {
-          font-size: 5rem;
+          font-size: 4.7rem;
+          line-height: 1;
+          background: linear-gradient(180deg, #ffffff 8%, #fff4fb 48%, #f8d3ea 100%);
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .sm {
           margin-left: 6px;
-          font-size: 2rem;
+          font-size: 1.95rem;
+          line-height: 1;
+          color: #fff8fc;
+          -webkit-text-fill-color: #fff8fc;
+          text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.25),
+            0 6px 14px rgba(24, 13, 56, 0.32);
         }
       }
 
